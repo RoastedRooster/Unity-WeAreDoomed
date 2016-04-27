@@ -11,7 +11,6 @@ namespace Parallax
         public float moveForce = 365f;
         public int jumpVelocity = 5;
 
-
         private Rigidbody2D rb2d;
 
         void Awake() {
@@ -36,13 +35,8 @@ namespace Parallax
         }
 
         void FixedUpdate() {
-            float h = Input.GetAxis("Horizontal");
-
-            if (h * rb2d.velocity.x < maxSpeed)
-                rb2d.AddForce(Vector2.right * h * moveForce);
-
-            if (Mathf.Abs(rb2d.velocity.x) > maxSpeed)
-                rb2d.velocity = new Vector2(Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
+            float h = Input.GetAxisRaw("Horizontal");
+            rb2d.velocity = new Vector2(h *maxSpeed,rb2d.velocity.y);
         }
     }
 }
